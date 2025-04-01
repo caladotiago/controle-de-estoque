@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: controle_de_estoque
+    environment:
+      POSTGRES_USER: bob
+      POSTGRES_PASSWORD: bob123
+      POSTGRES_DB: controle_de_estoque
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

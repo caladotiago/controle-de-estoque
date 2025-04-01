@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: controle-de-estoque
+  datasource:
+    url: jdbc:postgresql://localhost:5432/controle_de_estoque
+    username: bob
+    password: bob123
+    jpa:
+      hibernate:
+        ddl-auto: update
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+flyway:
+  user: bob
+  password: bob123
+  schemas: controle_de_estoque
+  locations: filesystem:resources/db/migration
