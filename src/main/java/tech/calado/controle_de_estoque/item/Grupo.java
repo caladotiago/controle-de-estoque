@@ -1,0 +1,15 @@
+package tech.calado.controle_de_estoque.item;
+
+enum Grupo {
+    HORTIFRUTI,
+    ACOUGUE,
+    PADARIA,
+    FRIOS_E_LATICINIOS,
+	MERCEARIA_DOCE,
+	MERCEARIA_SALGADA,
+	BEBIDAS,
+	LIMPEZA,
+	HIGIENE_PESSOAL,
+	DESCARTAVEIS,
+    PET_SHOP,
+}

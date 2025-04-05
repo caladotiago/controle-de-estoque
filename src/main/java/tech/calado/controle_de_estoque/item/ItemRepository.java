@@ -7,4 +7,6 @@ import java.util.UUID;
 
 @Repository
 interface ItemRepository extends CrudRepository<Item, UUID> {
+
+    boolean existsByCodigo(String codigo);
 }
