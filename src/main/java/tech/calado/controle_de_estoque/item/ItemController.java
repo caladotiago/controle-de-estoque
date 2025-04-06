@@ -11,12 +11,10 @@ public class ItemController {
 
     private final ItemService itemService;
 
-    private final ItemRepository repository;
-
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Iterable<Item> findAll() {
-        return repository.findAll();
+        return itemService.findAll();
     }
 
     @PostMapping
