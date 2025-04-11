@@ -7,17 +7,19 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class ItemService {
-    private final ItemRepository repository;
 
-    public Iterable<Item> findAll() {
-        return repository.findAll();
-    }
+	private final ItemRepository repository;
 
-    public Item create(Item itemToCreate) {
-        if (repository.existsByCodigo(itemToCreate.getCodigo())) {
-            throw new RuntimeException("item already exists");
-        }
+	public Iterable<Item> findAll() {
+		return repository.findAll();
+	}
 
-        return repository.save(itemToCreate);
-    }
+	public Item create(Item itemToCreate) {
+		if (repository.existsByCodigo(itemToCreate.getCodigo())) {
+			throw new RuntimeException("item already exists");
+		}
+
+		return repository.save(itemToCreate);
+	}
+
 }

@@ -11,17 +11,18 @@ import static java.util.UUID.randomUUID;
 @RequestMapping("/v1/items")
 public class ItemController {
 
-    private final ItemService itemService;
+	private final ItemService itemService;
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public Iterable<Item> findAll() {
-        return itemService.findAll();
-    }
+	@GetMapping
+	@ResponseStatus(HttpStatus.OK)
+	public Iterable<Item> findAll() {
+		return itemService.findAll();
+	}
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Item create(@RequestBody Item item) {
-        return itemService.create(item.withId(randomUUID()));
-    }
+	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
+	public Item create(@RequestBody Item item) {
+		return itemService.create(item.withId(randomUUID()));
+	}
+
 }

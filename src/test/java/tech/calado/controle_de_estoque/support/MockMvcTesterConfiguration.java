@@ -12,11 +12,10 @@ import java.util.List;
 @Configuration
 public class MockMvcTesterConfiguration {
 
-    @Bean
-    MockMvcTester mockMvcTester(@Autowired WebApplicationContext wac) {
-        return MockMvcTester.from(wac).withHttpMessageConverters(
-                List.of(wac.getBean(AbstractJackson2HttpMessageConverter.class))
-        );
-    }
+	@Bean
+	MockMvcTester mockMvcTester(@Autowired WebApplicationContext wac) {
+		return MockMvcTester.from(wac)
+			.withHttpMessageConverters(List.of(wac.getBean(AbstractJackson2HttpMessageConverter.class)));
+	}
 
 }

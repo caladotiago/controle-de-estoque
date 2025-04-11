@@ -18,19 +18,19 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 public abstract class PostgreSQLContainerTest {
 
-    @LocalServerPort
-    private Integer port;
+	@LocalServerPort
+	private Integer port;
 
-    @Container
-    static PostgreSQLContainer<?> container = new PostgreSQLContainer<>(
-            "postgres:16-alpine"
-    ).withInitScript("db/schema.sql");
+	@Container
+	static PostgreSQLContainer<?> container = new PostgreSQLContainer<>("postgres:16-alpine")
+		.withInitScript("db/schema.sql");
 
-    @DynamicPropertySource
-    static void configureProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url", container::getJdbcUrl);
-        registry.add("spring.datasource.username", container::getUsername);
-        registry.add("spring.datasource.password", container::getPassword);
-        registry.add("spring.datasource.jpa.hibernate.ddl-auto", () -> "none");
-    }
+	@DynamicPropertySource
+	static void configureProperties(DynamicPropertyRegistry registry) {
+		registry.add("spring.datasource.url", container::getJdbcUrl);
+		registry.add("spring.datasource.username", container::getUsername);
+		registry.add("spring.datasource.password", container::getPassword);
+		registry.add("spring.datasource.jpa.hibernate.ddl-auto", () -> "none");
+	}
+
 }
