@@ -6,16 +6,17 @@ import lombok.*;
 import java.util.UUID;
 
 import static lombok.AccessLevel.PACKAGE;
+import static lombok.AccessLevel.PRIVATE;
 
 @Entity
 @Getter
 @ToString
 @EqualsAndHashCode
+@NoArgsConstructor(access = PRIVATE)
 @AllArgsConstructor(access = PACKAGE, staticName = "of")
 public class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     private String codigo;
@@ -29,4 +30,10 @@ public class Item {
     private double quantidade;
 
     private double valorUnitario;
+
+    Item withId(UUID id) {
+        this.id = id;
+        return this;
+    }
+
 }
