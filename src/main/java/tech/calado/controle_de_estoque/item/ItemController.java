@@ -1,5 +1,6 @@
 package tech.calado.controle_de_estoque.item;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class ItemController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Item create(@RequestBody Item item) {
+	public Item create(@RequestBody @Valid Item item) {
 		return itemService.create(item.withId(randomUUID()));
 	}
 
