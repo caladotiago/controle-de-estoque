@@ -3,6 +3,7 @@ package tech.calado.controle_de_estoque.item;
 import lombok.AllArgsConstructor;
 
 import org.springframework.stereotype.Service;
+import tech.calado.controle_de_estoque.common.exception.ConflictException;
 
 @Service
 @AllArgsConstructor
@@ -16,7 +17,7 @@ public class ItemService {
 
 	public Item create(Item itemToCreate) {
 		if (repository.existsByCodigo(itemToCreate.getCodigo())) {
-			throw new RuntimeException("item already exists");
+			throw new ConflictException("item already exists");
 		}
 
 		return repository.save(itemToCreate);
