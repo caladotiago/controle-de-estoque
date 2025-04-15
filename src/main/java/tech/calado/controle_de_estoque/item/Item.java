@@ -24,7 +24,7 @@ public class Item {
 	private UUID id;
 
 	@NotNull
-	@Size(min = 5)
+	@Size(min = 4)
 	private String codigo;
 
 	@NotBlank
