@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static java.util.UUID.randomUUID;
 
 @RestController
@@ -16,7 +18,7 @@ public class ItemController {
 
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	public Iterable<Item> findAll() {
+	public List<Item> findAll() {
 		return itemService.findAll();
 	}
 

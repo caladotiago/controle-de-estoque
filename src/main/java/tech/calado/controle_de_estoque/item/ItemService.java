@@ -5,13 +5,15 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tech.calado.controle_de_estoque.common.exception.ConflictException;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class ItemService {
 
 	private final ItemRepository repository;
 
-	public Iterable<Item> findAll() {
+	public List<Item> findAll() {
 		return repository.findAll();
 	}
 
