@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import tech.calado.controle_de_estoque.common.exception.ConflictException;
+
+import java.util.List;
 
 import static java.util.UUID.randomUUID;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,6 +31,16 @@ public class ItemServiceTest {
 	}
 
 	@Test
+	void should_return_all_items() {
+		Item item = Item.of(randomUUID(), "00001", "Detergente Ype 500ML", LIMPEZA, UN, 1, 2.33);
+		List<Item> items = List.of(item);
+
+		when(repository.findAll()).thenReturn(items);
+
+		assertThat(service.findAll()).isEqualTo(items);
+	}
+
+	@Test
 	void should_create_item() {
 		Item item = Item.of(randomUUID(), "00001", "Detergente Ype 500ML", LIMPEZA, UN, 1, 2.33);
 
@@ -43,12 +56,12 @@ public class ItemServiceTest {
 	}
 
 	@Test
-	void should_throw_runtime_exception_when_item_with_given_code_already_exists() {
+	void should_throw_conflict_exception_when_item_with_given_code_already_exists() {
 		Item item = Item.of(randomUUID(), "00001", "Detergente Ype 500ML", LIMPEZA, UN, 1, 2.33);
 
 		when(repository.existsByCodigo(item.getCodigo())).thenReturn(true);
 
-		assertThatThrownBy(() -> service.create(item)).isExactlyInstanceOf(RuntimeException.class);
+		assertThatThrownBy(() -> service.create(item)).isExactlyInstanceOf(ConflictException.class);
 
 		InOrder inOrder = inOrder(repository);
 		inOrder.verify(repository).existsByCodigo(item.getCodigo());
