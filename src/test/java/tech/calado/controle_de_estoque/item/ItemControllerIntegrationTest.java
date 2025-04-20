@@ -13,6 +13,7 @@ import java.util.List;
 
 import static java.util.UUID.randomUUID;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.from;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static tech.calado.controle_de_estoque.item.Grupo.LIMPEZA;
 import static tech.calado.controle_de_estoque.item.Unidade.UN;
@@ -57,9 +58,20 @@ class ItemControllerIntegrationTest extends PostgreSQLContainerTest {
 			.contentType(APPLICATION_JSON)
 			.content(objectMapper.writeValueAsString(itemToCreate))).hasStatus(HttpStatus.CREATED)
 			.hasContentTypeCompatibleWith(APPLICATION_JSON)
-			.bodyJson();
+			.bodyJson()
+			.convertTo(Item.class)
+				.returns(itemToCreate.getCodigo(), from(Item::getCodigo));
 
 		assertThat(itemRepository.findAll()).hasSize(1);
+	}
+
+	@Test
+	void should_return_validation_errors_and_do_nothing_when_body_is_invalid() {
+	}
+
+	@Test
+	void should_create_only_one_item_when_multiple_requests_with_same_code_occurs() {
+
 	}
 
 }
