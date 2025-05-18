@@ -7,5 +7,6 @@ CREATE TABLE IF NOT EXISTS item (
     grupo VARCHAR(255),
     unidade VARCHAR(255),
     quantidade NUMERIC(8, 3),
-    valor_unitario NUMERIC(15, 2)
+    valor_unitario NUMERIC(15, 2),
+    CONSTRAINT uq_codigo UNIQUE(codigo)
 );

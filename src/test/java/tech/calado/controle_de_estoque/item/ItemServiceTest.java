@@ -32,7 +32,7 @@ public class ItemServiceTest {
 
 	@Test
 	void should_return_all_items() {
-		Item item = Item.of(randomUUID(), "0001", "Detergente Ype 500ML", LIMPEZA, UN, 1, 2.33);
+		Item item = Item.of(randomUUID(), "0001", "Detergente 500ML", LIMPEZA, UN, 1, 2.33);
 		List<Item> items = List.of(item);
 
 		when(repository.findAll()).thenReturn(items);
@@ -42,7 +42,7 @@ public class ItemServiceTest {
 
 	@Test
 	void should_create_item() {
-		Item item = Item.of(randomUUID(), "0001", "Detergente Ype 500ML", LIMPEZA, UN, 1, 2.33);
+		Item item = Item.of(randomUUID(), "0001", "Detergente 500ML", LIMPEZA, UN, 1, 2.33);
 
 		when(repository.existsByCodigo(item.getCodigo())).thenReturn(false);
 		when(repository.save(item)).thenReturn(item);
@@ -57,7 +57,7 @@ public class ItemServiceTest {
 
 	@Test
 	void should_throw_conflict_exception_when_item_with_given_code_already_exists() {
-		Item item = Item.of(randomUUID(), "0001", "Detergente Ype 500ML", LIMPEZA, UN, 1, 2.33);
+		Item item = Item.of(randomUUID(), "0001", "Detergente 500ML", LIMPEZA, UN, 1, 2.33);
 
 		when(repository.existsByCodigo(item.getCodigo())).thenReturn(true);
 
