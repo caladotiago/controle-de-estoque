@@ -65,7 +65,7 @@ class ItemControllerIntegrationTest extends PostgreSQLContainerTest {
 			.hasContentTypeCompatibleWith(APPLICATION_JSON)
 			.bodyJson()
 			.convertTo(Item.class)
-				.returns(itemToCreate.getCodigo(), from(Item::getCodigo));
+			.returns(itemToCreate.getCodigo(), from(Item::getCodigo));
 
 		assertThat(itemRepository.findAll()).hasSize(1);
 	}
@@ -79,7 +79,7 @@ class ItemControllerIntegrationTest extends PostgreSQLContainerTest {
 		doRequestsInParallel(itemToCreate, 5);
 
 		assertThat(itemRepository.findAll()).hasSize(1);
-    }
+	}
 
 	private void doRequestsInParallel(Item itemToCreate, int numberOfRequests) {
 		try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
@@ -88,19 +88,21 @@ class ItemControllerIntegrationTest extends PostgreSQLContainerTest {
 					System.out.println("Task " + i + " running on: " + Thread.currentThread().getName());
 					try {
 						assertThat(mockMvc.post()
-								.uri("/v1/items")
-								.contentType(APPLICATION_JSON)
-								.content(objectMapper.writeValueAsString(itemToCreate)))
-								.hasContentTypeCompatibleWith(APPLICATION_JSON);
+							.uri("/v1/items")
+							.contentType(APPLICATION_JSON)
+							.content(objectMapper.writeValueAsString(itemToCreate)))
+							.hasContentTypeCompatibleWith(APPLICATION_JSON);
 
 						System.out.println("Task " + i + " ok: " + Thread.currentThread().getName());
-					} catch (JsonProcessingException e) {
+					}
+					catch (JsonProcessingException e) {
 						throw new RuntimeException(e);
 					}
 				});
 			});
 			executor.shutdown();
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			System.out.println(Arrays.toString(e.getStackTrace()));
 		}
 	}
