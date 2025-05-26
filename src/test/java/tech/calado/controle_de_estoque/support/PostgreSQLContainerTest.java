@@ -22,7 +22,7 @@ public abstract class PostgreSQLContainerTest {
 	private Integer port;
 
 	@Container
-	static PostgreSQLContainer<?> container = new PostgreSQLContainer<>("postgres:16-alpine")
+	static PostgreSQLContainer<?> container = new PostgreSQLContainer<>("postgres:17-alpine")
 		.withInitScript("db/schema.sql");
 
 	@DynamicPropertySource
